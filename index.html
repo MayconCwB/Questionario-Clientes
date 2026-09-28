@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Briefing de Projeto | Sites e Aplicativos</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #172033;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --success: #16a34a;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.app {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+}
+
+.container {
+    width: 100%;
+    max-width: 760px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    background: var(--primary);
+    color: white;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 28px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-area {
+    margin-bottom: 15px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 7px;
+}
+
+.progress {
+    height: 7px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--primary);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: var(--card);
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+}
+
+.step {
+    display: none;
+    animation: fadeIn 0.25s ease;
+}
+
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-number {
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.step h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.step-description {
+    color: var(--muted);
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.field {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+    background: white;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.option {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+    background: white;
+}
+
+.option:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    border-color: var(--primary);
+    background: #eff6ff;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.option input {
+    display: none;
+}
+
+.option-icon {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.option-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.option-description {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.checkbox-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.checkbox-item:hover {
+    border-color: var(--primary);
+}
+
+.checkbox-item.selected {
+    background: #eff6ff;
+    border-color: var(--primary);
+}
+
+.checkbox-item input {
+    width: auto;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-back {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.btn-back:hover {
+    background: #e5e7eb;
+}
+
+.btn-next {
+    background: var(--primary);
+    color: white;
+    margin-left: auto;
+}
+
+.btn-next:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.summary-value {
+    font-weight: 600;
+    text-align: right;
+}
+
+.success {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+    background: #dcfce7;
+    color: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 35px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    .app {
+        padding: 15px 10px;
+        align-items: flex-start;
+    }
+
+    .card {
+        padding: 23px 18px;
+        border-radius: 18px;
+    }
+
+    .header {
+        margin-top: 10px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .step h2 {
+        font-size: 21px;
+    }
+
+    .options,
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons button {
+        flex: 1;
+    }
+
+    .summary-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .summary-value {
+        text-align: left;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="container">
+
+<header class="header">
+    <div class="logo">🚀</div>
+
+    <h1>Vamos transformar sua ideia em realidade?</h1>
+
+    <p>
+        Responda algumas perguntas para descobrirmos
+        a melhor solução para seu projeto.
+    </p>
+</header>
+
+<div class="progress-area">
+
+    <div class="progress-info">
+        <span id="progressText">Etapa 1 de 9</span>
+        <span id="progressPercent">11%</span>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+</div>
+
+<div class="card">
+
+<form id="briefingForm">
+
+<!-- =========================
+     ETAPA 1
+========================= -->
+
+<section class="step active" data-step="1">
+
+<div class="step-number">ETAPA 1</div>
+
+<h2>O que você precisa?</h2>
+
+<p class="step-description">
+Escolha o tipo de projeto que você está pensando em criar.
+</p>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="tipoProjeto" value="Site">
+<div class="option-icon">🌐</div>
+<div class="option-title">Site</div>
+<div class="option-description">
+Presença profissional na internet
+</div>
+</label>
+
+<label class="option">
+<input type="radio" name="tipoProjeto" value="Aplicativo">
+<div class="option-icon">📱</div>
+<div class="option-title">Aplicativo</div>
+<div class="option-description">
+Aplicativo para celular
+</div>
+</label>
+
+<label class="option">
+<input type="radio" name="tipoProjeto" value="Sistema Web">
+<div class="option-icon">💻</div>
+<div class="option-title">Sistema Web</div>
+<div class="option-description">
+Sistema acessado pelo navegador
+</div>
+</label>
+
+<label class="option">
+<input type="radio" name="tipoProjeto" value="Loja Virtual">
+<div class="option-icon">🛒</div>
+<div class="option-title">Loja Virtual</div>
+<div class="option-description">
+Venda de produtos pela internet
+</div>
+</label>
+
+<label class="option">
+<input type="radio" name="tipoProjeto" value="Site + Aplicativo">
+<div class="option-icon">🔥</div>
+<div class="option-title">Site + Aplicativo</div>
+<div class="option-description">
+Uma solução completa
+</div>
+</label>
+
+<label class="option">
+<input type="radio" name="tipoProjeto" value="Não sei">
+<div class="option-icon">🤔</div>
+<div class="option-title">Ainda não sei</div>
+<div class="option-description">
+Quero receber orientação
+</div>
+</label>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 2
+========================= -->
+
+<section class="step" data-step="2">
+
+<div class="step-number">ETAPA 2</div>
+
+<h2>Conte um pouco sobre você</h2>
+
+<p class="step-description">
+Essas informações nos ajudam a entender seu negócio.
+</p>
+
+<div class="field">
+<label>Nome da empresa *</label>
+<input type="text" id="empresa" placeholder="Ex.: Minha Empresa">
+</div>
+
+<div class="field">
+<label>Seu nome *</label>
+<input type="text" id="responsavel" placeholder="Ex.: João Silva">
+</div>
+
+<div class="field">
+<label>WhatsApp *</label>
+<input type="tel" id="whatsapp" placeholder="(41) 99999-9999">
+</div>
+
+<div class="field">
+<label>E-mail</label>
+<input type="email" id="email" placeholder="voce@email.com">
+</div>
+
+<div class="field">
+<label>Instagram ou site atual</label>
+<input type="text" id="instagram" placeholder="@empresa ou www.site.com">
+</div>
+
+<div class="field">
+<label>Qual é o segmento da sua empresa?</label>
+<input type="text" id="segmento" placeholder="Ex.: Restaurante">
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 3
+========================= -->
+
+<section class="step" data-step="3">
+
+<div class="step-number">ETAPA 3</div>
+
+<h2>Qual é o principal objetivo?</h2>
+
+<p class="step-description">
+O que você espera conseguir com esse projeto?
+</p>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="objetivo" value="Conseguir mais clientes">
+<div class="option-icon">👥</div>
+<div class="option-title">Mais clientes</div>
+</label>
+
+<label class="option">
+<input type="radio" name="objetivo" value="Vender mais">
+<div class="option-icon">💰</div>
+<div class="option-title">Vender mais</div>
+</label>
+
+<label class="option">
+<input type="radio" name="objetivo" value="Automatizar processos">
+<div class="option-icon">⚙️</div>
+<div class="option-title">Automatizar</div>
+</label>
+
+<label class="option">
+<input type="radio" name="objetivo" value="Melhorar atendimento">
+<div class="option-icon">💬</div>
+<div class="option-title">Melhorar atendimento</div>
+</label>
+
+<label class="option">
+<input type="radio" name="objetivo" value="Organizar empresa">
+<div class="option-icon">📊</div>
+<div class="option-title">Organizar empresa</div>
+</label>
+
+<label class="option">
+<input type="radio" name="objetivo" value="Criar algo novo">
+<div class="option-icon">💡</div>
+<div class="option-title">Criar algo novo</div>
+</label>
+
+</div>
+
+<div class="field" style="margin-top:25px;">
+<label>Explique um pouco melhor o que você espera:</label>
+<textarea id="objetivoDetalhes" placeholder="Conte com suas palavras..."></textarea>
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 4
+========================= -->
+
+<section class="step" data-step="4">
+
+<div class="step-number">ETAPA 4</div>
+
+<h2>O que sua solução precisa fazer?</h2>
+
+<p class="step-description">
+Selecione todas as funcionalidades que você considera importantes.
+</p>
+
+<div class="checkbox-grid">
+
+<label class="checkbox-item">
+<input type="checkbox" value="Login e cadastro">
+Login e cadastro
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Perfil do usuário">
+Perfil do usuário
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Produtos">
+Produtos
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Pedidos">
+Pedidos
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Agendamento">
+Agendamento
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Pagamento online">
+Pagamento online
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Pix">
+Pix
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="WhatsApp">
+WhatsApp
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Notificações">
+Notificações
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Localização / mapas">
+Localização / mapas
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Chat">
+Chat
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Área administrativa">
+Área administrativa
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Relatórios">
+Relatórios
+</label>
+
+<label class="checkbox-item">
+<input type="checkbox" value="Controle de estoque">
+Controle de estoque
+</label>
+
+</div>
+
+<div class="field" style="margin-top:25px;">
+<label>Existe alguma função indispensável?</label>
+<textarea id="funcaoExtra" placeholder="Explique aqui..."></textarea>
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 5
+========================= -->
+
+<section class="step" data-step="5">
+
+<div class="step-number">ETAPA 5</div>
+
+<h2>Como você imagina o visual?</h2>
+
+<p class="step-description">
+Escolha o estilo que mais combina com sua ideia.
+</p>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="estilo" value="Moderno">
+<div class="option-icon">✨</div>
+<div class="option-title">Moderno</div>
+</label>
+
+<label class="option">
+<input type="radio" name="estilo" value="Minimalista">
+<div class="option-icon">◻️</div>
+<div class="option-title">Minimalista</div>
+</label>
+
+<label class="option">
+<input type="radio" name="estilo" value="Tecnológico">
+<div class="option-icon">💙</div>
+<div class="option-title">Tecnológico</div>
+</label>
+
+<label class="option">
+<input type="radio" name="estilo" value="Elegante">
+<div class="option-icon">🖤</div>
+<div class="option-title">Elegante</div>
+</label>
+
+<label class="option">
+<input type="radio" name="estilo" value="Colorido">
+<div class="option-icon">🎨</div>
+<div class="option-title">Colorido</div>
+</label>
+
+<label class="option">
+<input type="radio" name="estilo" value="Corporativo">
+<div class="option-icon">🏢</div>
+<div class="option-title">Corporativo</div>
+</label>
+
+</div>
+
+<div class="field" style="margin-top:25px;">
+<label>Possui algum site ou aplicativo como referência?</label>
+<input type="text" id="referencia" placeholder="Cole o link ou explique">
+</div>
+
+<div class="field">
+<label>Possui logo ou identidade visual?</label>
+
+<select id="identidade">
+<option value="">Selecione</option>
+<option>Sim, tenho tudo</option>
+<option>Tenho apenas a logo</option>
+<option>Preciso criar</option>
+<option>Ainda não sei</option>
+</select>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 6
+========================= -->
+
+<section class="step" data-step="6">
+
+<div class="step-number">ETAPA 6</div>
+
+<h2>Como será utilizado?</h2>
+
+<p class="step-description">
+Vamos entender quem utilizará sua solução.
+</p>
+
+<div class="field">
+
+<label>Quem utilizará?</label>
+
+<select id="publico">
+<option value="">Selecione</option>
+<option>Clientes</option>
+<option>Funcionários</option>
+<option>Clientes e funcionários</option>
+<option>Público em geral</option>
+<option>Outro</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<label>Quantidade aproximada de usuários</label>
+
+<select id="usuarios">
+<option value="">Selecione</option>
+<option>Até 100</option>
+<option>100 a 500</option>
+<option>500 a 1.000</option>
+<option>1.000 a 10.000</option>
+<option>Mais de 10.000</option>
+<option>Não sei</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<label>Precisa de área administrativa?</label>
+
+<select id="admin">
+<option value="">Selecione</option>
+<option>Sim</option>
+<option>Não</option>
+<option>Não sei</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<label>Existe algum sistema que precisa ser integrado?</label>
+
+<textarea id="integracoes" placeholder="Ex.: sistema financeiro, estoque, WhatsApp..."></textarea>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 7
+========================= -->
+
+<section class="step" data-step="7">
+
+<div class="step-number">ETAPA 7</div>
+
+<h2>Quando você pretende lançar?</h2>
+
+<p class="step-description">
+Essas informações ajudam no planejamento do projeto.
+</p>
+
+<div class="field">
+
+<label>Prazo desejado</label>
+
+<select id="prazo">
+<option value="">Selecione</option>
+<option>O quanto antes</option>
+<option>Até 15 dias</option>
+<option>Até 30 dias</option>
+<option>Até 60 dias</option>
+<option>Até 90 dias</option>
+<option>Não tenho prazo definido</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<label>Por que você precisa desse prazo?</label>
+
+<textarea id="motivoPrazo"></textarea>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 8
+========================= -->
+
+<section class="step" data-step="8">
+
+<div class="step-number">ETAPA 8</div>
+
+<h2>Qual investimento você imagina?</h2>
+
+<p class="step-description">
+Essa informação ajuda a propor uma solução compatível com sua realidade.
+</p>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="orcamento" value="Até R$ 1.000">
+<div class="option-icon">💵</div>
+<div class="option-title">Até R$ 1.000</div>
+</label>
+
+<label class="option">
+<input type="radio" name="orcamento" value="R$ 1.000 a R$ 2.500">
+<div class="option-icon">💰</div>
+<div class="option-title">R$ 1.000 a R$ 2.500</div>
+</label>
+
+<label class="option">
+<input type="radio" name="orcamento" value="R$ 2.500 a R$ 5.000">
+<div class="option-icon">💰</div>
+<div class="option-title">R$ 2.500 a R$ 5.000</div>
+</label>
+
+<label class="option">
+<input type="radio" name="orcamento" value="R$ 5.000 a R$ 10.000">
+<div class="option-icon">💎</div>
+<div class="option-title">R$ 5.000 a R$ 10.000</div>
+</label>
+
+<label class="option">
+<input type="radio" name="orcamento" value="Acima de R$ 10.000">
+<div class="option-icon">🚀</div>
+<div class="option-title">Acima de R$ 10.000</div>
+</label>
+
+<label class="option">
+<input type="radio" name="orcamento" value="Preciso de orientação">
+<div class="option-icon">🤔</div>
+<div class="option-title">Preciso de orientação</div>
+</label>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ETAPA 9
+========================= -->
+
+<section class="step" data-step="9">
+
+<div class="step-number">ETAPA 9</div>
+
+<h2>Conte sua ideia</h2>
+
+<p class="step-description">
+Agora é sua oportunidade de explicar qualquer coisa que ainda não conseguimos perguntar.
+</p>
+
+<div class="field">
+
+<label>Como você imagina seu projeto?</label>
+
+<textarea
+id="ideia"
+style="min-height:180px;"
+placeholder="Conte sua ideia com suas próprias palavras..."
+></textarea>
+
+</div>
+
+<div class="field">
+
+<label>O que não pode faltar?</label>
+
+<textarea id="naoPodeFaltar"></textarea>
+
+</div>
+
+<div class="field">
+
+<label>Existe alguma coisa que você NÃO quer?</label>
+
+<textarea id="naoQuer"></textarea>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     RESULTADO
+========================= -->
+
+<section class="step" data-step="10">
+
+<div class="success">
+
+<div class="success-icon">✓</div>
+
+<h2>Briefing concluído!</h2>
+
+<p class="step-description">
+Confira abaixo o resumo das informações fornecidas.
+</p>
+
+</div>
+
+<div class="summary" id="summary"></div>
+
+</section>
+
+
+<!-- =========================
+     BOTÕES
+========================= -->
+
+<div class="buttons">
+
+<button
+type="button"
+class="btn-back"
+id="backBtn"
+onclick="previousStep()"
+>
+← Voltar
+</button>
+
+<button
+type="button"
+class="btn-next"
+id="nextBtn"
+onclick="nextStep()"
+>
+Continuar →
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   CONFIGURAÇÃO
+========================================== */
+
+let currentStep = 1;
+
+const totalSteps = 10;
+
+const form = document.getElementById("briefingForm");
+
+const steps = document.querySelectorAll(".step");
+
+const progressBar = document.getElementById("progressBar");
+
+const progressText = document.getElementById("progressText");
+
+const progressPercent = document.getElementById("progressPercent");
+
+const backBtn = document.getElementById("backBtn");
+
+const nextBtn = document.getElementById("nextBtn");
+
+
+/* ==========================================
+   SELEÇÃO VISUAL DOS CARDS
+========================================== */
+
+document.querySelectorAll(".option").forEach(option => {
+
+    option.addEventListener("click", function() {
+
+        const input = this.querySelector("input");
+
+        if (!input) return;
+
+        const name = input.name;
+
+        document
+            .querySelectorAll(`input[name="${name}"]`)
+            .forEach(item => {
+
+                item.closest(".option")
+                    ?.classList.remove("selected");
+
+            });
+
+        input.checked = true;
+
+        this.classList.add("selected");
+
+    });
+
+});
+
+
+/* ==========================================
+   CHECKBOX VISUAL
+========================================== */
+
+document.querySelectorAll(".checkbox-item").forEach(item => {
+
+    const checkbox = item.querySelector("input");
+
+    checkbox.addEventListener("change", function() {
+
+        item.classList.toggle("selected", this.checked);
+
+    });
+
+});
+
+
+/* ==========================================
+   MOSTRAR ETAPA
+========================================== */
+
+function showStep(step) {
+
+    steps.forEach(item => {
+
+        item.classList.remove("active");
+
+    });
+
+    const target = document.querySelector(
+        `.step[data-step="${step}"]`
+    );
+
+    if (target) {
+        target.classList.add("active");
+    }
+
+    const percent =
+        Math.round((step / totalSteps) * 100);
+
+    progressBar.style.width = percent + "%";
+
+    progressText.textContent =
+        `Etapa ${step} de ${totalSteps}`;
+
+    progressPercent.textContent =
+        percent + "%";
+
+    backBtn.style.display =
+        step === 1 ? "none" : "block";
+
+    if (step === totalSteps) {
+
+        nextBtn.textContent = "Finalizar";
+
+    } else {
+
+        nextBtn.textContent = "Continuar →";
+
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ==========================================
+   VALIDAÇÃO
+========================================== */
+
+function validateStep() {
+
+    if (currentStep === 1) {
+
+        const selected =
+            document.querySelector(
+                'input[name="tipoProjeto"]:checked'
+            );
+
+        if (!selected) {
+
+            alert("Selecione o tipo de projeto.");
+
+            return false;
+
+        }
+
+    }
+
+    if (currentStep === 2) {
+
+        const empresa =
+            document.getElementById("empresa").value.trim();
+
+        const responsavel =
+            document.getElementById("responsavel").value.trim();
+
+        const whatsapp =
+            document.getElementById("whatsapp").value.trim();
+
+        if (!empresa || !responsavel || !whatsapp) {
+
+            alert(
+                "Preencha empresa, nome e WhatsApp para continuar."
+            );
+
+            return false;
+
+        }
+
+    }
+
+    if (currentStep === 3) {
+
+        const selected =
+            document.querySelector(
+                'input[name="objetivo"]:checked'
+            );
+
+        if (!selected) {
+
+            alert("Selecione o principal objetivo.");
+
+            return false;
+
+        }
+
+    }
+
+    if (currentStep === 5) {
+
+        const selected =
+            document.querySelector(
+                'input[name="estilo"]:checked'
+            );
+
+        if (!selected) {
+
+            alert("Escolha um estilo visual.");
+
+            return false;
+
+        }
+
+    }
+
+    if (currentStep === 8) {
+
+        const selected =
+            document.querySelector(
+                'input[name="orcamento"]:checked'
+            );
+
+        if (!selected) {
+
+            alert("Selecione uma faixa de investimento.");
+
+            return false;
+
+        }
+
+    }
+
+    return true;
+
+}
+
+
+/* ==========================================
+   PRÓXIMA ETAPA
+========================================== */
+
+function nextStep() {
+
+    if (!validateStep()) return;
+
+    if (currentStep < totalSteps) {
+
+        currentStep++;
+
+        if (currentStep === totalSteps) {
+
+            generateSummary();
+
+        }
+
+        showStep(currentStep);
+
+    }
+
+}
+
+
+/* ==========================================
+   ETAPA ANTERIOR
+========================================== */
+
+function previousStep() {
+
+    if (currentStep > 1) {
+
+        currentStep--;
+
+        showStep(currentStep);
+
+    }
+
+}
+
+
+/* ==========================================
+   PEGAR VALOR DE RADIO
+========================================== */
+
+function getRadio(name) {
+
+    const selected =
+        document.querySelector(
+            `input[name="${name}"]:checked`
+        );
+
+    return selected ? selected.value : "Não informado";
+
+}
+
+
+/* ==========================================
+   PEGAR CHECKBOXES
+========================================== */
+
+function getCheckboxes() {
+
+    const selected =
+        document.querySelectorAll(
+            ".checkbox-item input:checked"
+        );
+
+    if (!selected.length) {
+
+        return "Não informado";
+
+    }
+
+    return Array.from(selected)
+        .map(item => item.value)
+        .join(", ");
+
+}
+
+
+/* ==========================================
+   GERAR RESUMO
+========================================== */
+
+function generateSummary() {
+
+    const data = {
+
+        "Empresa":
+            document.getElementById("empresa").value || "Não informado",
+
+        "Responsável":
+            document.getElementById("responsavel").value || "Não informado",
+
+        "WhatsApp":
+            document.getElementById("whatsapp").value || "Não informado",
+
+        "E-mail":
+            document.getElementById("email").value || "Não informado",
+
+        "Projeto":
+            getRadio("tipoProjeto"),
+
+        "Segmento":
+            document.getElementById("segmento").value || "Não informado",
+
+        "Objetivo":
+            getRadio("objetivo"),
+
+        "Detalhes do objetivo":
+            document.getElementById("objetivoDetalhes").value || "Não informado",
+
+        "Funcionalidades":
+            getCheckboxes(),
+
+        "Função indispensável":
+            document.getElementById("funcaoExtra").value || "Não informado",
+
+        "Estilo":
+            getRadio("estilo"),
+
+        "Referência":
+            document.getElementById("referencia").value || "Não informado",
+
+        "Identidade visual":
+            document.getElementById("identidade").value || "Não informado",
+
+        "Público":
+            document.getElementById("publico").value || "Não informado",
+
+        "Usuários":
+            document.getElementById("usuarios").value || "Não informado",
+
+        "Área administrativa":
+            document.getElementById("admin").value || "Não informado",
+
+        "Integrações":
+            document.getElementById("integracoes").value || "Não informado",
+
+        "Prazo":
+            document.getElementById("prazo").value || "Não informado",
+
+        "Motivo do prazo":
+            document.getElementById("motivoPrazo").value || "Não informado",
+
+        "Investimento":
+            getRadio("orcamento"),
+
+        "Ideia":
+            document.getElementById("ideia").value || "Não informado",
+
+        "Não pode faltar":
+            document.getElementById("naoPodeFaltar").value || "Não informado",
+
+        "Não quer":
+            document.getElementById("naoQuer").value || "Não informado"
+
+    };
+
+    let html = "";
+
+    Object.entries(data).forEach(([label, value]) => {
+
+        html += `
+            <div class="summary-row">
+
+                <div class="summary-label">
+                    ${escapeHtml(label)}
+                </div>
+
+                <div class="summary-value">
+                    ${escapeHtml(value)}
+                </div>
+
+            </div>
+        `;
+
+    });
+
+    document.getElementById("summary").innerHTML = html;
+
+}
+
+
+/* ==========================================
+   PROTEÇÃO CONTRA HTML
+========================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==========================================
+   FINALIZAR
+========================================== */
+
+function finish() {
+
+    generateSummary();
+
+    alert(
+        "Briefing concluído! Agora podemos enviar essas informações."
+    );
+
+}
+
+
+/* ==========================================
+   INICIALIZAÇÃO
+========================================== */
+
+showStep(currentStep);
+
+</script>
+
+</body>
+</html>
